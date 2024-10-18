@@ -1,7 +1,9 @@
 pipeline {
     agent {
-        label 'test-agent'
-        customWorkspace '/var/lib/jenkins/workspace/${env.JOB_NAME}/${env.BUILD_NUMBER}'
+        node {
+            label 'test-agent'
+            customWorkspace '/var/lib/jenkins/workspace/${env.JOB_NAME}/${env.BUILD_NUMBER}'
+        }
     }
 
     options {
@@ -21,14 +23,18 @@ pipeline {
 
     stages {
 
-         steps {
-            git branch: 'main',
-            credentialsId: 'github',
-            url: 'https://github.com/prashant1507/behave-playwright.git'
+         stage('Checkout') {
+            steps {
+                git branch: 'main',
+                credentialsId: 'github',
+                url: 'https://github.com/prashant1507/behave-playwright.git'
+             }
          }
 
-         stage {
-             sh 'python runner.py'
+         stage('Start Test') {
+             steps {
+                sh 'python runner.py'
+             }
          }
     }
 }
