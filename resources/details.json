@@ -1,9 +1,9 @@
 {
-  "delete_old_reports": true,
-  "start_docker_compose": true,
-  "password_for_sshpass": "password",
-  "headless": false,
-  "allow_tracing": true,
+  "delete_old_reports": "${DELETE_OLD_REPORTS}",
+  "start_docker_compose": false,
+  "password_for_sshpass": "${PASSWORD_FOR_SSHPASS}",
+  "headless": "${HEADLESS}",
+  "allow_tracing": "${ALLOW_TRACING}",
   "email": {
     "send_report_on_email": false,
     "token": "",
@@ -11,10 +11,10 @@
     "receiver_email": ""
   },
 
-  "selenium_host_ip": "127.0.0.1",
-  "browser": "Chrome",
+  "selenium_host_ip": "${SELENIUM_HOST_IP}",
+  "browser": "${BROWSER}",
 
-  "url": "https://www.saucedemo.com",
+  "url": "${URL}",
   "logins": {
     "standard_user": {
       "username": "standard_user",

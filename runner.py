@@ -1,6 +1,9 @@
+import os
+
 from pycommons.lang.stringutils import StringUtils
 from utils.docker_compose_actions import start_docker_compose, stop_docker_compose
 from utils.helper_utils import prepare_dirs, execute_command_using_popen
+from utils.prepare_details_file import prepare_details_file
 from utils.reporting.generate_report import generate_allure_report
 from helpers.constants.framework_constants import FrameworkConstants as Fc
 
@@ -20,6 +23,7 @@ def logs():
 def main():
     process = None
     log = logs()
+    prepare_details_file()
     # Read and print the output line by line
     try:
         prepare_dirs()

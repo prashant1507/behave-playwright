@@ -1,0 +1,41 @@
+pipeline {
+    agent {
+        label 'test-agent'
+        customWorkspace '/var/lib/jenkins/workspace/${env.JOB_NAME}/${env.BUILD_NUMBER}'
+    }
+
+    options {
+        buildDiscarder {
+            logRotator {
+                artifactDaysToKeepStr: '',
+                artifactNumToKeepStr: '5',
+                daysToKeepStr: '',
+                numToKeepStr: ''
+            }
+        }
+        ansiColor('xterm')
+    }
+
+    parameters {
+      choice choices: ['true', 'false'], name: 'DELETE_OLD_REPORTS'
+      string name: 'PASSWORD_FOR_SSHPASS', trim: true
+      choice choices: ['false', 'true'], name: 'HEADLESS'
+      choice choices: ['false', 'true'], name: 'ALLOW_TRACING'
+      string name: 'SELENIUM_HOST_IP', trim: true
+      choice choices: ['Chrome', 'Firefox'], name: 'BROWSER'
+      string name: 'URL', defaultValue: 'https://www.saucedemo.com', trim: true
+    }
+
+    stages {
+
+         steps {
+            git branch: 'main',
+            credentialsId: 'github',
+            url: 'https://github.com/prashant1507/behave-playwright.git'
+         }
+
+         stage {
+             sh 'python runner.py'
+         }
+    }
+}

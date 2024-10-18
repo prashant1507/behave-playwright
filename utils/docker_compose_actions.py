@@ -19,7 +19,7 @@ def start_docker_compose(logger):
         try:
             stop_docker_compose(logger)
             logger.info("Starting Docker Compose")
-            execute_command_using_run(f"sshpass -p {details["password_for_sshpass"]} sudo docker-compose -f {Fc.docker_compose_file} up -d")
+            execute_command_using_run(f"sshpass -p {details["password_for_sshpass"]} sudo docker-compose -f {Fc.docker_compose_file} up --remove-orphans -d")
             logger.info("Waiting for all containers to be healthy")
             while not all_services_healthy():
                 logger.info("Containers are still starting up. Waiting for 5 seconds")
