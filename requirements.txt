@@ -1,0 +1,7 @@
+behave~=1.2.6
+allure-behave
+behavex
+allure-python-commons~=2.13.5
+Faker
+pycommons-lang
+playwright

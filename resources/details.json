@@ -1,0 +1,40 @@
+{
+  "delete_old_reports": true,
+  "start_docker_compose": true,
+  "password_for_sshpass": "password",
+  "headless": false,
+  "allow_tracing": true,
+  "email": {
+    "send_report_on_email": false,
+    "token": "",
+    "sender_email": "",
+    "receiver_email": ""
+  },
+
+  "selenium_host_ip": "127.0.0.1",
+  "browser": "Chrome",
+
+  "url": "https://www.saucedemo.com",
+  "logins": {
+    "standard_user": {
+      "username": "standard_user",
+      "password": "secret_sauce"
+    },
+    "locked_out_user": {
+      "username": "locked_out_user",
+      "password": "secret_sauce"
+    },
+    "performance_glitch_user": {
+      "username": "performance_glitch_user",
+      "password": "secret_sauce"
+    },
+    "error_user": {
+      "username": "error_user",
+      "password": "secret_sauce"
+    },
+    "problem_user": {
+      "username": "problem_user",
+      "password": "secret_sauce"
+    }
+  }
+}

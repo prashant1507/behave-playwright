@@ -1,0 +1,3 @@
+Playwright in docker - https://chatgpt.com/c/6711edb3-49b8-8010-9a2e-933316f2542e
+
+Fix allure report for parallel run
