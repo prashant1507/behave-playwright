@@ -28,7 +28,7 @@ def main():
     try:
         prepare_dirs()
         # start_docker_compose(log)
-        process = execute_command_using_popen(f"behavex {Fc.features} -c {Fc.conf_behavex} --parallel-processes 2 --parallel-delay 1000 --parallel-scheme feature --show-progress-bar -t=@QA-5,@QA-4")
+        process = execute_command_using_popen(f"behavex {Fc.features} -c {Fc.conf_behavex} --parallel-processes 2 --parallel-delay 1000 --parallel-scheme feature --show-progress-bar -t=@QA-6")
         while True:
             output = process.stdout.readline()
             if output == StringUtils.EMPTY and process.poll() is not None:

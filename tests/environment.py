@@ -56,11 +56,10 @@ def after_step(context: Context, step):
 
 def after_scenario(context, scenario):
     logger.info(f"Scenario status: {scenario.status}")
-    test_id = scenario.tags[0]
-    summary = scenario.name
+    test_id = " ".join([tag for tag in scenario.tags])
+    summary = str(scenario.name).split("--")[0].strip()
     status = str(scenario.status).split(".")[1].capitalize()
     author = "user_1"
-    print(test_id, summary, status, author)
     add_in_elk(logger, test_id, summary, status, author)
 
 def after_feature(context, feature):

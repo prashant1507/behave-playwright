@@ -2,9 +2,12 @@
     "delete_old_reports": true,
     "start_docker_compose": true,
     "password_for_sshpass": "password",
-    "headless": true,
+    "headless": false,
     "allow_tracing": true,
-    "add_in_elk": false,
+    "elk": {
+        "add_in_elk": false,
+        "elk_url": "http://192.168.0.24:9200"
+    },
     "email": {
         "send_report_on_email": false,
         "token": "",

@@ -11,6 +11,7 @@ Feature: Login
       | label_name |
       | Products   |
 
+  @QA-6 @QA-7 @QA-8
   Scenario Outline: Verify if user is able to login with '<username>'
     Given User navigates to login page
     When User enters username as '<username>'
