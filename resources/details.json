@@ -1,40 +1,39 @@
 {
-  "delete_old_reports": "${DELETE_OLD_REPORTS}",
-  "start_docker_compose": false,
-  "password_for_sshpass": "${PASSWORD_FOR_SSHPASS}",
-  "headless": "${HEADLESS}",
-  "allow_tracing": "${ALLOW_TRACING}",
-  "email": {
-    "send_report_on_email": false,
-    "token": "",
-    "sender_email": "",
-    "receiver_email": ""
-  },
-
-  "selenium_host_ip": "${SELENIUM_HOST_IP}",
-  "browser": "${BROWSER}",
-
-  "url": "${URL}",
-  "logins": {
-    "standard_user": {
-      "username": "standard_user",
-      "password": "secret_sauce"
+    "delete_old_reports": true,
+    "start_docker_compose": true,
+    "password_for_sshpass": "password",
+    "headless": true,
+    "allow_tracing": true,
+    "add_in_elk": false,
+    "email": {
+        "send_report_on_email": false,
+        "token": "",
+        "sender_email": "",
+        "receiver_email": ""
     },
-    "locked_out_user": {
-      "username": "locked_out_user",
-      "password": "secret_sauce"
-    },
-    "performance_glitch_user": {
-      "username": "performance_glitch_user",
-      "password": "secret_sauce"
-    },
-    "error_user": {
-      "username": "error_user",
-      "password": "secret_sauce"
-    },
-    "problem_user": {
-      "username": "problem_user",
-      "password": "secret_sauce"
+    "selenium_host_ip": "127.0.0.1",
+    "browser": "Chrome",
+    "url": "https://www.saucedemo.com",
+    "logins": {
+        "standard_user": {
+            "username": "standard_user",
+            "password": "secret_sauce"
+        },
+        "locked_out_user": {
+            "username": "locked_out_user",
+            "password": "secret_sauce"
+        },
+        "performance_glitch_user": {
+            "username": "performance_glitch_user",
+            "password": "secret_sauce"
+        },
+        "error_user": {
+            "username": "error_user",
+            "password": "secret_sauce"
+        },
+        "problem_user": {
+            "username": "problem_user",
+            "password": "secret_sauce"
+        }
     }
-  }
 }

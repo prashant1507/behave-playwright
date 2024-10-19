@@ -6,6 +6,7 @@ from behavex_images.image_attachments import AttachmentsCondition
 from playwright.sync_api import Page
 
 from helpers.constants.framework_constants import FrameworkConstants as Fc
+from utils.elk import add_in_elk
 from utils.reporting.logger import get_logs
 from utils.reporting.screenshots import attach_screenshot_in_report
 from utils.browser_utils import prepare_browser, test_tracing
@@ -55,7 +56,12 @@ def after_step(context: Context, step):
 
 def after_scenario(context, scenario):
     logger.info(f"Scenario status: {scenario.status}")
-
+    test_id = scenario.tags[0]
+    summary = scenario.name
+    status = str(scenario.status).split(".")[1].capitalize()
+    author = "user_1"
+    print(test_id, summary, status, author)
+    add_in_elk(logger, test_id, summary, status, author)
 
 def after_feature(context, feature):
     test_tracing(context, False)
