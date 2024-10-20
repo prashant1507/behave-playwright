@@ -12,9 +12,14 @@ def generate_allure_report(logger):
     file_name = current_time.strftime("%d_%m_%y-%H_%M_%S_%f")[:-3]
     report = f"{Fc.allure_html_dir}/{file_name}"
 
-    command = f"allure generate {Fc.allure_json_dir} --report-dir {report} --clean --report-name Test_Report --single-file"
+    command = (
+        f"allure generate {Fc.allure_json_dir} "
+        f"--report-dir {report} --clean --report-name Test_Report "
+        f"--single-file"
+    )
     # To generate allure report with all files and folders
     # command = f"allure generate {Fc.allure_json_dir} --report-dir {report} --clean --report-name Test_Report"
+    
     execute_command_using_run(command)
     logger.info(f"HTML output report is located at: {report}/index.html")
     send_report(logger, report)
