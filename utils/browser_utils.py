@@ -1,16 +1,13 @@
 import datetime
 
 from playwright.sync_api import sync_playwright
-from utils.helper_utils import read_file
 from helpers.constants.framework_constants import FrameworkConstants as Fc
-
-details = read_file(Fc.details_file)
 
 def prepare_browser(context):
     try:
         playwright = sync_playwright().start()
         browser = playwright.chromium.launch(
-            headless=details["headless"], 
+            headless=context.details.getboolean("general", "headless"),
             args=["--start-maximized"]
         )
         context.browser_context = browser.new_context()
@@ -21,12 +18,12 @@ def prepare_browser(context):
         context.playwright = playwright
 
     except Exception as e:
-        playwright.stop()
+        context.playwright.stop()
         raise RuntimeError(f"Failed to prepare browser: {e}")
 
 
 def test_tracing(context, flag) -> None:
-    if details["allow_tracing"]:
+    if context.details.getboolean("general", "allow_tracing"):
         if flag:
             context.browser_context.tracing.start(screenshots=True, snapshots=True)
         else:

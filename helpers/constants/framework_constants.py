@@ -20,8 +20,8 @@ class FrameworkConstants:
     test_trace_dir = os.path.join(reports_parent_dir, "test_traces")
 
 
-    docker_compose_file = os.path.join(resources_dir, "docker-compose.yml")
-    details_file = os.path.join(resources, "details.json")
+    docker_compose_file = os.path.join(resources, "docker-compose.yml")
+    details_file = os.path.join(resources, "details.ini")
     behave_ini = os.path.abspath("behave.ini")
     conf_behavex = os.path.abspath("conf_behavex.cfg")
 

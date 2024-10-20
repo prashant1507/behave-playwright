@@ -13,25 +13,25 @@ A robust test automation framework built with Python, utilizing Behave for BDD, 
     Execute: allure --version
    ```
    Ref Link: https://allurereport.org/docs/install/
-3. Execute `playwright install` (To install PLaywright browsers)
-4. Setup `resources/details.json` as
+3. Execute `playwright install` (To install Playwright browsers)
+4. Setup `resources/details.ini` as
    ```
-      delete_old_reports: true [false]
-      start_docker_compose: false [/true] (if false then framwork assumes selenium is running already. Required only if PLaywright is ruuning on Selenium)
-      password_for_sshpass: "passowrd" (this has no affect but can be useful if anyone want to start docker-compose where sudo is required)
-      headless: true [/false]
-      allow_tracing: true [/false]
-      tags: "" (Provide specifi tag like tags: "@QA-1")
-      add_in_elk: false [/true] (if true then framework assuemes elastic search is running)
-                  - if add_in_elk is true the set elk_url: "https://elk.com"
-      send_report_on_email: true [/false]
+      delete_old_reports = true [false]
+      start_docker_compose = false [/true] (if false then framwork assumes selenium is running already. Required only if PLaywright is ruuning on Selenium)
+      password_for_sshpass = "passowrd" (this has no affect but can be useful if anyone want to start docker-compose where sudo is required)
+      headless = true [/false]
+      allow_tracing = true [/false]
+      tags =  (Provide specifi tag like tags = @QA-1)
+      add_in_elk = false [/true] (if true then framework assuemes elastic search is running)
+                  - if add_in_elk is true the set elk_url = https://elk.com
+      send_report_on_email = true [/false]
                   - if send_report_on_email is true the provide below:
-                        - token: "" (Check Notes -> 'Create Gmail Key Password' to generate Token)
-                        - sender_email: ""
-                        - receiver_email: ""
-      selenium_host_ip: "" (Selenium host - required only if PLaywright is ruuning on Selenium)
-      browser: "Chrome" [/"Firefox"]
-      url: "https://www.saucedemo.com"      
+                        - token =  (Check Notes -> 'Create Gmail Key Password' to generate Token)
+                        - sender_email = sender@gmail.com
+                        - receiver_email = receiver@gmail.com
+      selenium_host_ip =  (Selenium host - required only if PLaywright is ruuning on Selenium)
+      browser = Chrome [/Firefox]
+      url = https://www.saucedemo.com      
    ```
 
 # Start Tests

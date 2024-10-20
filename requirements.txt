@@ -6,3 +6,4 @@ Faker
 pycommons-lang
 playwright
 requests
+configparser

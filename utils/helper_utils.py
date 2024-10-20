@@ -1,3 +1,4 @@
+import configparser
 import json
 import subprocess
 import os
@@ -14,8 +15,10 @@ def prepare_dirs():
         Fc.pretty_dir, Fc.rerun_dir, Fc.screenshots_dir
     ]
 
-    details = read_file(Fc.details_file)
-    if details["delete_old_reports"]:
+    details = configparser.ConfigParser()
+    details.read(Fc.details_file)
+
+    if details.get("general", "tags"):
         for subdir in dir_structure:
             delete_dir(subdir)
             create_dir(subdir)
