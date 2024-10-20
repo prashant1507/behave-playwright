@@ -33,13 +33,17 @@ def click_login_button(context):
 
 @then("Homepage is displayed")
 def verify_homepage(context):
-    assert context.login_page.get_page_tile() == "Swag Labs"
+    actual = context.login_page.get_page_tile()
+    expected = "Swag Labs"
+    assert actual == expected, f"Expected: '{expected}', Actual: '{actual}'."
 
 
 @then("Labels are present")
 def verify_labels(context):
     for r in context.table:
-        assert context.login_page.get_text_from_page() == r["label_name"]
+        actual = context.login_page.get_text_from_page()
+        expected = r["label_name"]
+        assert actual == expected, f"Expected: '{expected}', Actual: '{actual}'."
 
 
 @then("Product is displayed")
