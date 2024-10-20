@@ -1,4 +1,8 @@
 
+**Python Test Framework with Behave, Playwright, and BehaveX**
+
+A robust test automation framework built with Python, utilizing Behave for BDD, Playwright for browser automation, and BehaveX for parallel execution. The framework supports Allure and BehaveX HTML for reporting, and integrates seamlessly with Elasticsearch and Kibana for advanced test result analysis and visualization.
+
 # Setup
 1. Execute `pip3 install -r requirements.tx`
 2. Set up allure-report
