@@ -21,10 +21,10 @@
 1. Check all behave options `behave -h`
 2. Check all allure options `allure -h`
 3. Check all playwright options `playwright -h`
-4Execute `allure serve FOLDER_PATH` to start and create allure-report
+4. Execute `allure serve FOLDER_PATH` to start and create allure-report
 
 # Notes:
-1. Test will be executed in parallel feature by feature
+1. Test will be executed in parallel scenario by scenario
 2. Create Gmail Key Password
    ```
    1. Goto: https://myaccount.google.com/apppasswords

@@ -1,12 +1,12 @@
 from behave import given, when, then
 from playwright.sync_api import expect
 
-from helpers.constants.framework_constants import FrameworkConstants
+from helpers.constants.framework_constants import FrameworkConstants as Fc
 from utils.helper_utils import read_file
 from tests.pages.homepage_page import Homepage
 from tests.pages.login_page import LoginPage
 
-details = read_file(FrameworkConstants.details_file)
+details = read_file(Fc.details_file)
 
 
 @given("User navigates to login page")

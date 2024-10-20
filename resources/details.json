@@ -4,6 +4,7 @@
     "password_for_sshpass": "password",
     "headless": false,
     "allow_tracing": true,
+    "tags": "@Login",
     "elk": {
         "add_in_elk": false,
         "elk_url": "http://192.168.0.24:9200"

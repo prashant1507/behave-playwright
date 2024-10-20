@@ -2,7 +2,7 @@ import datetime
 
 from utils.helper_utils import execute_command_using_run
 from helpers.constants.framework_constants import FrameworkConstants as Fc
-from utils.send_report_on_email import send_report, details
+from utils.reporting.send_report_on_email import send_report, details
 
 
 def generate_allure_report(logger):
@@ -12,6 +12,9 @@ def generate_allure_report(logger):
     file_name = current_time.strftime("%d_%m_%y-%H_%M_%S_%f")[:-3]
     report = f"{Fc.allure_html_dir}/{file_name}"
     execute_command_using_run(f"allure generate {Fc.allure_json_dir} --report-dir {report} --clean --report-name Test_Report --single-file")
+
+    # To generate allure report with all files and folders
+    # execute_command_using_run(f"allure generate {Fc.allure_json_dir} --report-dir {report} --clean --report-name Test_Report")
     logger.info(f"HTML output report is located at: {report}/index.html")
     send_report(logger, report)
     return f"{report}/index.html"

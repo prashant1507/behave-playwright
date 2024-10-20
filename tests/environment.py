@@ -28,7 +28,6 @@ def before_feature(context: Context, feature):
     if formatted_tags:
         logger.info(f"{formatted_tags}")
     logger.info(f"Feature: {feature.name}")
-    prepare_browser(context)
 
 def before_scenario(context, scenario):
     formatted_tags = " ".join([f"@{tag}" for tag in scenario.tags])
@@ -43,6 +42,7 @@ def before_scenario(context, scenario):
 
     for step in scenario.steps:
         logger.info(f"{step.keyword} {step.name}")
+    prepare_browser(context)
 
 
 def after_step(context: Context, step):
@@ -55,21 +55,21 @@ def after_step(context: Context, step):
     image_attachments.attach_image_file(context, f"{Fc.screenshots_dir}/{file_name}.png")
 
 def after_scenario(context, scenario):
-    logger.info(f"Scenario status: {scenario.status}")
-    test_id = " ".join([tag for tag in scenario.tags])
-    summary = str(scenario.name).split("--")[0].strip()
-    status = str(scenario.status).split(".")[1].capitalize()
-    author = "user_1"
-    add_in_elk(logger, test_id, summary, status, author)
-
-def after_feature(context, feature):
-    test_tracing(context, False)
     try:
-        logger.info(f"Feature Status: {feature.status}")
+        logger.info(f"Scenario status: {scenario.status}")
+        test_id = " ".join([tag for tag in scenario.tags])
+        summary = str(scenario.name).split("--")[0].strip()
+        status = str(scenario.status).split(".")[1].capitalize()
+        author = "user_1"
+        add_in_elk(logger, test_id, summary, status, author)
+        test_tracing(context, False)
     finally:
         context.page.close()
         context.browser.close()
         context.playwright.stop()
+
+def after_feature(context, feature):
+    logger.info(f"Feature Status: {feature.status}")
 
 # def after_all(context):
 #     try:

@@ -6,6 +6,7 @@ from utils.helper_utils import prepare_dirs, execute_command_using_popen
 from utils.prepare_details_file import prepare_details_file
 from utils.reporting.generate_report import generate_allure_report
 from helpers.constants.framework_constants import FrameworkConstants as Fc
+from utils.helper_utils import read_file
 
 import logging
 
@@ -26,9 +27,11 @@ def main():
     prepare_details_file()
     # Read and print the output line by line
     try:
+        details = read_file(Fc.details_file)
+        tags = details["tags"]
         prepare_dirs()
         # start_docker_compose(log)
-        process = execute_command_using_popen(f"behavex {Fc.features} -c {Fc.conf_behavex} --parallel-processes 2 --parallel-delay 1000 --parallel-scheme feature --show-progress-bar -t=@QA-6")
+        process = execute_command_using_popen(f"behavex {Fc.features} -c {Fc.conf_behavex} --parallel-processes 2 --parallel-delay 1000 --parallel-scheme scenario --show-progress-bar -t={tags}")
         while True:
             output = process.stdout.readline()
             if output == StringUtils.EMPTY and process.poll() is not None:
