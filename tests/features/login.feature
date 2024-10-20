@@ -1,7 +1,7 @@
 @Login
 Feature: Login
 
-  @QA-9 @xx
+  @QA-9
   Scenario: Verify if user is able to login with valid user
     Given User navigates to login page
     When User enters username as 'standard_user'
@@ -12,7 +12,7 @@ Feature: Login
       | label_name |
       | Products   |
 
-  @QA-6 @xx
+  @QA-6
   Scenario: Verify if user is able to login with 'performance_glitch_user'
     Given User navigates to login page
     When User enters username as 'performance_glitch_user'

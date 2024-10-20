@@ -29,8 +29,9 @@ def start_tests(log) -> None:
     command = (
         f"behavex {Fc.features} -c {Fc.conf_behavex} "
         f"--parallel-processes 2 --parallel-delay 1000 "
-        f"--parallel-scheme scenario --show-progress-bar"
+        f"--parallel-scheme scenario --show-progress-bar -t={tags}"
     )
+    print(command)
     process = execute_command_using_popen(command)
 
     try:
