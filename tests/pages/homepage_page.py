@@ -3,7 +3,7 @@ from tests.pages.base_page import BasePage
 
 class Homepage:
 
-    products_label = "//span[normalize-space()='Products']"
+    _products_label = "//span[normalize-space()='Products']"
 
     def __init__(self, page):
         self.bp = BasePage(page)
