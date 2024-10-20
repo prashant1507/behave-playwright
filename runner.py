@@ -12,26 +12,28 @@ import logging
 
 def logs():
     logger = logging.getLogger()
-    logger.handlers.clear()
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(message)s"
-    )
+    if not logger.hasHandlers():
+        logger.handlers.clear()
+        logging.basicConfig(
+            level=logging.INFO,
+            format="%(message)s"
+        )
     return logger
 
-
-
-def main():
-    process = None
-    log = logs()
+def start_tests(log) -> None:
     prepare_details_file()
-    # Read and print the output line by line
+    details = read_file(Fc.details_file)
+    tags = details["tags"]
+    prepare_dirs()
+    # start_docker_compose(log)
+    command = (
+        f"behavex {Fc.features} -c {Fc.conf_behavex} "
+        f"--parallel-processes 2 --parallel-delay 1000 "
+        f"--parallel-scheme scenario --show-progress-bar -t={tags}"
+    )
+    process = execute_command_using_popen(command)
+
     try:
-        details = read_file(Fc.details_file)
-        tags = details["tags"]
-        prepare_dirs()
-        # start_docker_compose(log)
-        process = execute_command_using_popen(f"behavex {Fc.features} -c {Fc.conf_behavex} --parallel-processes 2 --parallel-delay 1000 --parallel-scheme scenario --show-progress-bar -t={tags}")
         while True:
             output = process.stdout.readline()
             if output == StringUtils.EMPTY and process.poll() is not None:
@@ -41,9 +43,19 @@ def main():
     except KeyboardInterrupt:
         log.error("Process terminated by user.")
         process.terminate()
+        raise
     finally:
         generate_allure_report(log)
         # stop_docker_compose(log)
+
+def main():
+    process = None
+    log = logs()
+    try:
+        start_tests(log)
+    except Exception as e:
+        log.error(f"An unexpected error occurred: {e}")
+        raise
 
 if __name__ == "__main__":
     main()
