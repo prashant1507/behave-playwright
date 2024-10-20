@@ -6,9 +6,9 @@ details = read_file(Fc.details_file)
 
 
 class LoginPage:
-    username_text_box = "#user-name"
-    password_text_box = "#password"
-    login_button = "#login-button"
+    _username_text_box = "#user-name"
+    _password_text_box = "#password"
+    _login_button = "#login-button"
 
     def __init__(self, page):
         self.url = details["url"]
