@@ -1,5 +1,7 @@
+import configparser
 import datetime
 
+import allure
 from behave.runner import Context
 from behavex_images import image_attachments
 from behavex_images.image_attachments import AttachmentsCondition
@@ -7,6 +9,7 @@ from playwright.sync_api import Page
 
 from helpers.constants.framework_constants import FrameworkConstants as Fc
 from utils.elk import add_in_elk
+from utils.helper_utils import read_file
 from utils.reporting.logger import get_logs
 from utils.reporting.screenshots import attach_screenshot_in_report
 from utils.browser_utils import prepare_browser, test_tracing
@@ -15,10 +18,12 @@ from utils.browser_utils import prepare_browser, test_tracing
 def before_all(context: Context):
     current_time = datetime.datetime.now()
     file_name = current_time.strftime("%d_%m_%y-%H_%M_%S_%f")[:-3]
-    global logger, details
+    global logger
     logger = get_logs(f"{Fc.logs_dir}/{file_name}.txt")
     # start_docker_compose(logger)
     image_attachments.set_attachments_condition(context, AttachmentsCondition.ALWAYS)
+    context.details = configparser.ConfigParser()
+    context.details.read(Fc.details_file)
 
 
 def before_feature(context: Context, feature):
@@ -61,8 +66,13 @@ def after_scenario(context, scenario):
         summary = str(scenario.name).split("--")[0].strip()
         status = str(scenario.status).split(".")[1].capitalize()
         author = "user_1"
-        add_in_elk(logger, test_id, summary, status, author)
+        add_in_elk(context, logger, test_id, summary, status, author)
         test_tracing(context, False)
+        allure.dynamic.title("Scenario status")
+        allure.dynamic.link("https://www.link.com", test_id)
+        allure.dynamic.issue(f"https://www.issue.com/{test_id}", test_id)
+        allure.dynamic.testcase(f"https://www.testcase.com/{test_id}", test_id)
+
     finally:
         context.page.close()
         context.browser.close()

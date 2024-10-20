@@ -1,3 +1,4 @@
+import configparser
 import smtplib
 import os
 
@@ -11,14 +12,15 @@ from utils.helper_utils import read_file
 subject = "Test Report"
 body = "Please find the attached file."
 
-details = read_file(Fc.details_file)
+details = configparser.ConfigParser()
+details.read(Fc.details_file)
 
 def send_email_with_attachment(file_path, logger):
     global server
     msg = MIMEMultipart()
 
-    msg['From'] = details["email"]["sender_email"]
-    msg['To'] = details["email"]["receiver_email"]
+    msg['From'] = details.get("email", "sender_email")
+    msg['To'] = details.get("email", "receiver_email")
     msg['Subject'] = subject
 
     msg.attach(MIMEText(body, 'plain'))
@@ -34,8 +36,8 @@ def send_email_with_attachment(file_path, logger):
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(details["email"]["sender_email"], details["email"]["token"])
-        server.sendmail(details["email"]["sender_email"], details["email"]["receiver_email"], msg.as_string())
+        server.login(details.get("email", "sender_email"), details.get("email", "token"))
+        server.sendmail(details.get("email", "sender_email"), details.get("email", "receiver_email"), msg.as_string())
         logger.info("Email sent successfully.")
     except Exception as e:
         logger.info(f"Failed to send email: {e}")
@@ -45,6 +47,6 @@ def send_email_with_attachment(file_path, logger):
 
 
 def send_report(logger, file_path):
-    if details["email"]["send_report_on_email"]:
+    if details.getboolean("email", "send_report_on_email"):
         logger.info("Sending Report on Email")
         send_email_with_attachment(file_path, logger)
