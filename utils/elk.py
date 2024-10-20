@@ -20,10 +20,10 @@ def add_in_elk(logger, test_id, summary, status, author):
             "Content-Type": "application/json"
         }
 
-        response = requests.post(url, headers=headers, data=json.dumps(data))
-
-        if response.status_code == 201:
-            logger.info(f"{test_id} {summary} {status} {author} | Document added successfully.")
-        else:
+        try:
+            response = requests.post(url, headers=headers, data=json.dumps(data))
+            response.raise_for_status()
+        except Exception as e:
             logger.info(f"Failed to add document. Status code: {response.status_code}")
             logger.info("Response:", response.json())
+            
