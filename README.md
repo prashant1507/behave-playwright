@@ -52,7 +52,7 @@ A robust test automation framework built with Python, utilizing Behave for BDD, 
    1. Goto: https://myaccount.google.com/apppasswords
    2. Enter App Name
    3. Copy generated password
-   4. Provide in resources/details.json
+   4. Provide in resources/details.ini
    ```
 4. The test runs on local browsers. But docker support is also available (Refer `start_docker_compose()` in [runner.py](runner.py))
 5. Reports will be available as below:
