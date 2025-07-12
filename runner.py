@@ -1,7 +1,6 @@
 import configparser
 
 from pycommons.lang.stringutils import StringUtils
-from utils.docker_compose_actions import start_docker_compose, stop_docker_compose
 from utils.helper_utils import prepare_dirs, execute_command_using_popen
 from utils.preapre_details_file import prepare_details_file
 from utils.reporting.generate_report import generate_allure_report
@@ -25,13 +24,12 @@ def start_tests(log) -> None:
     details_ini.read(Fc.details_file)
     tags = details_ini.get("general", "tags")
     prepare_dirs()
-    # start_docker_compose(log)
     command = (
         f"behavex {Fc.features} -c {Fc.conf_behavex} "
         f"--parallel-processes 2 --parallel-delay 1000 "
-        f"--parallel-scheme scenario --show-progress-bar -t={tags}"
+        f"--parallel-scheme scenario --show-progress-bar -t={tags} --formatter=behavex.outputs.formatters.allure_behavex_formatter:AllureBehaveXFormatter"
     )
-    print(command)
+    log.info(command)
     process = execute_command_using_popen(command)
 
     try:
@@ -47,7 +45,6 @@ def start_tests(log) -> None:
         raise
     finally:
         generate_allure_report(log)
-        # stop_docker_compose(log)
 
 def main():
     log = logs()

@@ -18,6 +18,7 @@ Feature: Homepage
     And User clicks on 'Login' button
     Then Homepage is displayed
 
+  @QA-10
   Scenario: This is failed test case
     When User enters username as 'problem_user'
     And User enters password for 'problem_user'

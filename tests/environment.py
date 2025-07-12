@@ -9,7 +9,6 @@ from playwright.sync_api import Page
 
 from helpers.constants.framework_constants import FrameworkConstants as Fc
 from utils.elk import add_in_elk
-from utils.helper_utils import read_file
 from utils.reporting.logger import get_logs
 from utils.reporting.screenshots import attach_screenshot_in_report
 from utils.browser_utils import prepare_browser, test_tracing
@@ -20,7 +19,6 @@ def before_all(context: Context):
     file_name = current_time.strftime("%d_%m_%y-%H_%M_%S_%f")[:-3]
     global logger
     logger = get_logs(f"{Fc.logs_dir}/{file_name}.txt")
-    # start_docker_compose(logger)
     image_attachments.set_attachments_condition(context, AttachmentsCondition.ALWAYS)
     context.details = configparser.ConfigParser()
     context.details.read(Fc.details_file)

@@ -5,20 +5,20 @@ A robust test automation framework built with Python, utilizing Behave for BDD, 
 
 # Setup
 1. Execute `pip3 install -r requirements.tx`
-2. Set up allure-report
+2. Set up [allure-report](https://allurereport.org/docs/install/)
    ```
       # Linux
-    Download from https://allurereport.org/docs/install-for-linux/
+    Download from [allure-for-linux](https://allurereport.org/docs/install-for-linux/)
     Execute: sudo dpkg -i allure_*_all.deb
     Execute: allure --version
+
+     # MacOS
+     Install: brew install allure
    ```
-   Ref Link: https://allurereport.org/docs/install/
 3. Execute `playwright install` (To install Playwright browsers)
 4. Setup `resources/details.ini` as
    ```
       delete_old_reports = true [false]
-      start_docker_compose = false [/true] (if false then framwork assumes selenium is running already. Required only if PLaywright is ruuning on Selenium)
-      password_for_sshpass = "passowrd" (this has no affect but can be useful if anyone want to start docker-compose where sudo is required)
       headless = true [/false]
       allow_tracing = true [/false]
       tags =  (Provide specifi tag like tags = @QA-1)
@@ -29,7 +29,6 @@ A robust test automation framework built with Python, utilizing Behave for BDD, 
                         - token =  (Check Notes -> 'Create Gmail Key Password' to generate Token)
                         - sender_email = sender@gmail.com
                         - receiver_email = receiver@gmail.com
-      selenium_host_ip =  (Selenium host - required only if PLaywright is ruuning on Selenium)
       browser = Chrome [/Firefox]
       url = https://www.saucedemo.com      
    ```
@@ -46,16 +45,16 @@ A robust test automation framework built with Python, utilizing Behave for BDD, 
 
 # Notes:
 1. Test is using https://www.saucedemo.com
-3. Test will be executed in parallel scenario by scenario
-4. Create Gmail Key Password
+2. Test will be executed in parallel scenario by scenario
+3. Create Gmail Key Password
    ```
    1. Goto: https://myaccount.google.com/apppasswords
    2. Enter App Name
    3. Copy generated password
    4. Provide in resources/details.ini
    ```
-5. The test runs on local browsers. But docker support is also available (Refer `start_docker_compose()` in [runner.py](runner.py))
-6. Reports will be available as below:
+4. The test runs on local browsers
+5. Reports will be available as below:
      - Allure: `reports/allure_report`
      - Behavex HTML: `report/html`
-7. Refer [behave.ini](behave.ini) for all settings
+6. Refer [behave.ini](behave.ini) for all settings
